@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 app.use(cors({
     origin: [
         'http://localhost:5174',
-        'https://ecommerce-backend-cut4z0z7n-vishu-project.vercel.app/'
+        'https://ecommerce-admin-three-sable.vercel.app/'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
