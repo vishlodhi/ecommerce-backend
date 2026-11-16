@@ -9,20 +9,34 @@ import productRouter from './routes/productRoute.js';
 /* App Config */
 const app = express();
 const port = process.env.PORT || 4000;
+
+/* Middleware */
+app.use(cors({
+    origin: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(express.json());
+
+/* Database Connections */
 connectDB();
 connectCloudinary();
 
-/* Middleware */
-app.use(express.json());
-app.use(cors());
-
-/* api endPoints */
-
+/* API Endpoints */
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 
 app.get('/', (req, res) => {
     res.send('API Working');
-})
+});
 
-app.listen(port, () => console.log(`Server started on port : ${port}`))
+/* Local Server */
+if (!process.env.VERCEL) {
+    app.listen(port, () => {
+        console.log(`Server started on port : ${port}`);
+    });
+}
+
+/* Vercel Export */
+export default app;
